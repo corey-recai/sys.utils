@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# load the utility functions
-source lib/utils.sh
-
 # check if kvm is properly installed
 kvm-ok() {
   # look for /dev/kvm binary
@@ -15,13 +12,9 @@ kvm-ok() {
   fi
 }
 
-install() {
+cpkg-docker() {
   # check that necessary bundles are installed
   check_bundles "kvm-host" "kernel-kvm"
-
-  # fmt.print "Trying to stop intentionally..."
-  # return 1 2>/dev/null
-
   # check that kvm is properly installed
   kvm-ok
 }

@@ -23,21 +23,9 @@ Docker Desktop for Linux runs a Virtual Machine (VM). For more information on wh
 
 Docker Desktop runs a VM that requires [KVM support](https://www.linux-kvm.org).
 
-The `kvm` module should load automatically if the host has virtualization support. To load the module manually, run:
+The `kvm` module should load automatically if the host has virtualization support.
 
-```console
-$ modprobe kvm
-```
-
-Depending on the processor of the host machine, the corresponding module must be loaded:
-
-```console
-$ modprobe kvm_intel  # Intel processors
-
-$ modprobe kvm_amd    # AMD processors
-```
-
-If the above commands fail, you can view the diagnostics by running:
+The install script accounts for the possiblity that the `kvm` module is not installed and will try to install it:
 
 ```console
 $ kvm-ok

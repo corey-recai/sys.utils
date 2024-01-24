@@ -9,11 +9,9 @@ fmt.print() {
   # only takes one argument
   if [ $# -gt 1 ]; then
     echo "fmt.print:ERROR: Too many arguments"
-
     # stop execution and forward default error to discard
     return 1 2>/dev/null
   fi
-
   # return formatted string
   echo -e "\n$1" | awk '{$1=$1};1'
 }
@@ -53,7 +51,7 @@ check_bundles() {
   is_installed "$@"
 }
 
-run() {
+pkg-add() {
   # create a temporary directory & file
   mkdir -p "$tmp_dir"
   touch "$tmp"
@@ -61,5 +59,17 @@ run() {
   $@
   # remove any temporary files
   rm -rf "$tmp_dir"
+}
 
+do_install() {
+  # load the install script for the selected package
+  source "packages/$1/install.sh"
+
+  pkg-add "cpkg-$1"
+  exit 0
+}
+
+do_default() {
+  fmt.print "cpkg:ERROR: Unknown command: $1"
+  exit 1
 }
