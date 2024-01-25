@@ -3,7 +3,7 @@
 # cpkg install <package name>
 # $1 - command install, remove, etc.
 # $2 - package name
-cpkg() {
+function cpkg {
   # run commands in subshells to avoid collisions & exit appropriately
   case "$1" in
   install)

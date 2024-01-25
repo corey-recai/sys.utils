@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # check if kvm is properly installed
-kvm-ok() {
+function check_kvm {
   # look for /dev/kvm binary
   if [ -e /dev/kvm ]; then
     fmt.print "INFO: /dev/kvm exists
@@ -12,9 +12,10 @@ kvm-ok() {
   fi
 }
 
-cpkg-docker() {
+function cpkg-docker {
   # check that necessary bundles are installed
   check_bundles "kvm-host" "kernel-kvm"
   # check that kvm is properly installed
-  kvm-ok
+  check_kvm
+  user_in_group "kvm"
 }
